@@ -4,6 +4,14 @@ cmake_minimum_required (VERSION 2.8.3)
 set (HPCC_GM_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 set (CMAKE_MODULE_PATH "${HPCC_GM_SOURCE_DIR}/cmake_modules/")
 
+###
+## Build Level
+###
+if( NOT BUILD_LEVEL )
+    set ( BUILD_LEVEL "COMMUNITY" )
+endif()
+###
+
 option(EXEC_PREFIX "Set the execution prefix")
 
 if (NOT LICENSE_FILE)
@@ -12,11 +20,11 @@ endif()
 
 include (${HPCC_GM_SOURCE_DIR}/cmake_modules/gmCommonSetup.cmake)
 
-set ( CPACK_PACKAGE_CONTACT "HPCCSystems <ossdevelopment@lexisnexis.com>" 
-set( CPACK_SOURCE_GENERATOR TGZ )
-set(CPACK_SYSTEM_NAME "${CMAKE_SYSTEM_NAME}-${CPACK_RPM_PACKAGE_ARCHITECTURE}")
+set (CPACK_PACKAGE_CONTACT "HPCCSystems <ossdevelopment@lexisnexis.com>")
+set (CPACK_SOURCE_GENERATOR TGZ )
+set (CPACK_SYSTEM_NAME "${CMAKE_SYSTEM_NAME}-${CPACK_RPM_PACKAGE_ARCHITECTURE}")
 
-IF ( CMAKE_SYSTEM MATCHES Linux )
+IF ( CMAKE_SYSTEM_NAME MATCHES Linux )
     EXECUTE_PROCESS (
                 COMMAND ${CMAKE_MODULE_PATH}/distrocheck.sh
                     OUTPUT_VARIABLE packageManagement
@@ -44,13 +52,12 @@ IF ( CMAKE_SYSTEM MATCHES Linux )
         SET(CPACK_PACKAGE_FILE_NAME "${CMAKE_PROJECT_NAME}_${version}-${stagever}${CPACK_SYSTEM_NAME}")
     ENDIF ()
 
-ENDIF ( CMAKE_SYSTEM MATCHES Linux )
+ENDIF ( CMAKE_SYSTEM_NAME MATCHES Linux )
 
 MESSAGE ("-- Current release version is ${CPACK_PACKAGE_FILE_NAME}")
 
 SET ( CPACK_SOURCE_GENERATOR TGZ )
 
-IF (NOT "${CMAKE_VERSION}" VERSION_LESS "2.8.1")
 IF (NOT "${CMAKE_VERSION}" VERSION_LESS "2.8.1")
     IF ( CMAKE_SYSTEM MATCHES Linux )
         IF ( ${packageManagement} STREQUAL "DEB" )
@@ -84,8 +91,9 @@ IF (NOT "${CMAKE_VERSION}" VERSION_LESS "2.8.1")
     IF ( EXISTS ${CMAKE_MODULE_PATH}/dependencies/${packageRevision}.cmake )
         INCLUDE( ${CMAKE_MODULE_PATH}/dependencies/${packageRevision}.cmake )
     ELSE()
-        MESSAGE("-- WARNING: DEPENDENCY FILE FOR ${packageRevision} NOT FOUND, Using deps template.")
-        INCLUDE( ${CMAKE_MODULE_PATH}/dependencies/template.cmake )
+         MESSAGE("-- WARNING: DEPENDENCY FILE FOR ${packageRevision} NOT FOUND")
+#        MESSAGE("-- WARNING: DEPENDENCY FILE FOR ${packageRevision} NOT FOUND, Using deps template.")
+#        INCLUDE( ${CMAKE_MODULE_PATH}/dependencies/template.cmake )
     ENDIF()     
 ELSE()
     MESSAGE("WARNING: CMAKE 2.8.1 or later required to create RPMs from this project")
