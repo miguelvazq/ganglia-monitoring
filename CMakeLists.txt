@@ -70,7 +70,8 @@ IF (NOT "${CMAKE_VERSION}" VERSION_LESS "2.8.1")
                 ## CPack instruction required for Debian
                 ###
                 MESSAGE ("-- Packing BASH installation files")
-                SET ( CPACK_DEBIAN_PACKAGE_CONTROL_EXTRA "${CMAKE_CURRENT_BINARY_DIR}/postinst;${CMAKE_CURRENT_BINARY_DIR}/prerm;${CMAKE_CURRENT_BINARY_DIR}/postrm" )
+#                SET ( CPACK_DEBIAN_PACKAGE_CONTROL_EXTRA "${CMAKE_CURRENT_BINARY_DIR}/postinst;${CMAKE_CURRENT_BINARY_DIR}/prerm;${CMAKE_CURRENT_BINARY_DIR}/postrm" )
+                SET ( CPACK_DEBIAN_PACKAGE_CONTROL_EXTRA "${CMAKE_SOURCE_DIR}/postinst;${CMAKE_SOURCE_DIR}/prerm;${CMAKE_SOURCE_DIR}/postrm" )
             ENDIF ()
 
         ELSEIF ( ${packageManagement} STREQUAL "RPM" )
@@ -94,7 +95,22 @@ IF (NOT "${CMAKE_VERSION}" VERSION_LESS "2.8.1")
          MESSAGE("-- WARNING: DEPENDENCY FILE FOR ${packageRevision} NOT FOUND")
 #        MESSAGE("-- WARNING: DEPENDENCY FILE FOR ${packageRevision} NOT FOUND, Using deps template.")
 #        INCLUDE( ${CMAKE_MODULE_PATH}/dependencies/template.cmake )
-    ENDIF()     
+    ENDIF()
+
+    IF ( UNIX )
+     SET ( CPACK_PACKAGING_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}" )
+    ENDIF()
+
+ 
+    SET ( CPACK_MONOLITHIC_INSTALL TRUE )
+		SET ( CPACK_PACKAGE_VENDOR "HPCC Systems" )
+   
+		#INSTALL ( FILES  
+
+#		INSTALL( FILES "${CMAKE_CURRENT_SOURCE_DIR}/test.inc" DESTINATION include COMPONENT headers)
+		INSTALL( FILES "${CMAKE_CURRENT_SOURCE_DIR}/test.inc" DESTINATION /myspecial/yourspecialfiles )
+		INCLUDE ( CPack )
+	
 ELSE()
     MESSAGE("WARNING: CMAKE 2.8.1 or later required to create RPMs from this project")
 ENDIF()
