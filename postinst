@@ -1,0 +1,8 @@
+#!/bin/bash
+
+crontab -l |grep -v "gmetric -n roxie_instances -v 0 -u instance" > /tmp/.cronTabCopy
+echo "* * * * * /usr/bin/gmetric -n roxie_instances -v 0 -u instances -t uint32 > /dev/null" >> /tmp/.cronTabCopy
+crontab /tmp/.cronTabCopy
+
+
+

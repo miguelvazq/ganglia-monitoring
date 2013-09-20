@@ -1,1 +1,1 @@
-set ( CPACK_DEBIAN_PACKAGE_DEPENDS  "hpcc-platform, collectd-core, ganglia-monitor" )
+set ( CPACK_DEBIAN_PACKAGE_DEPENDS  "hpccsystems-platform, collectd-core, ganglia-monitor" )
