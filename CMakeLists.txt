@@ -1,5 +1,5 @@
 project (hpccsystems-ganglia-monitoring)
-cmake_minimum_required (VERSION 2.8.3)
+cmake_minimum_required (VERSION 2.8.2)
 
 set (HPCC_GM_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 set (CMAKE_MODULE_PATH "${HPCC_GM_SOURCE_DIR}/cmake_modules/")
@@ -49,7 +49,7 @@ IF ( CMAKE_SYSTEM_NAME MATCHES Linux )
         SET(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} /usr/lib)
     ELSEIF ( ${packageManagement} STREQUAL "RPM" )
         SET(CPACK_PACKAGE_FILE_NAME     "${CMAKE_PROJECT_NAME}-${version}-${stagever}.${packageRevisionArch}")
-        SET(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} /usr/lib64)
+        SET(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} usr/lib64)
     ELSE()
         SET(CPACK_PACKAGE_FILE_NAME "${CMAKE_PROJECT_NAME}_${version}-${stagever}${CPACK_SYSTEM_NAME}")
     ENDIF ()
@@ -234,7 +234,7 @@ message( STATUS "lib64: ${LIB64}" )
 
 SET ( CPACK_SOURCE_GENERATOR TGZ )
 
-IF (NOT "${CMAKE_VERSION}" VERSION_LESS "2.8.1")
+IF (NOT "${CMAKE_VERSION}" VERSION_LESS "2.8.28.28.28.28.28.28.28.2")
     IF ( CMAKE_SYSTEM MATCHES Linux )
         IF ( ${packageManagement} STREQUAL "DEB" )
             IF ("${CMAKE_VERSION}" VERSION_EQUAL "2.8.2")
@@ -286,7 +286,7 @@ IF (NOT "${CMAKE_VERSION}" VERSION_LESS "2.8.1")
 #		INSTALL( FILES "${CMAKE_CURRENT_SOURCE_DIR}/test.inc" DESTINATION include COMPONENT headers)
 
 		INSTALL( FILES "${CMAKE_CURRENT_SOURCE_DIR}/modroxie.py" DESTINATION ${CMAKE_LIBRARY_PATH}/ganglia/python_modules  )
-		INSTALL( FILES "${CMAKE_CURRENT_SOURCE_DIR}/modroxie.pyconf" DESTINATION /etc/ganglia  )
+		INSTALL( FILES "${CMAKE_CURRENT_SOURCE_DIR}/modroxie.pyconf" DESTINATION etc/ganglia  )
 		INCLUDE ( CPack )
 	
 ELSE()
