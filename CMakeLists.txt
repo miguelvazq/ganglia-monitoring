@@ -49,7 +49,7 @@ IF ( CMAKE_SYSTEM_NAME MATCHES Linux )
         SET(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} /usr/lib)
     ELSEIF ( ${packageManagement} STREQUAL "RPM" )
         SET(CPACK_PACKAGE_FILE_NAME     "${CMAKE_PROJECT_NAME}-${version}-${stagever}.${packageRevisionArch}")
-        SET(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} usr/lib64)
+        SET(CMAKE_LIBRARY_PATH "/usr/lib64")
     ELSE()
         SET(CPACK_PACKAGE_FILE_NAME "${CMAKE_PROJECT_NAME}_${version}-${stagever}${CPACK_SYSTEM_NAME}")
     ENDIF ()
@@ -286,7 +286,8 @@ IF (NOT "${CMAKE_VERSION}" VERSION_LESS "2.8.2")
 #		INSTALL( FILES "${CMAKE_CURRENT_SOURCE_DIR}/test.inc" DESTINATION include COMPONENT headers)
 
 		INSTALL( FILES "${CMAKE_CURRENT_SOURCE_DIR}/modroxie.py" DESTINATION ${CMAKE_LIBRARY_PATH}/ganglia/python_modules  )
-		INSTALL( FILES "${CMAKE_CURRENT_SOURCE_DIR}/modroxie.pyconf" DESTINATION etc/ganglia  )
+		INSTALL( FILES "${CMAKE_CURRENT_SOURCE_DIR}/modroxie.pyconf"
+DESTINATION /etc/ganglia/conf.d  )
 		INCLUDE ( CPack )
 	
 ELSE()
