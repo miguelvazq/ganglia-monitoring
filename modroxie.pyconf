@@ -7,7 +7,7 @@ modules {
 
 collection_group {
   collect_every = 30
-  time_threshold = 1
+  time_threshold = 45
 
  metric {
 		name = "resultsReceived"
