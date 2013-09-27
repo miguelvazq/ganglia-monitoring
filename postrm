@@ -1,5 +1,5 @@
 #!/bin/bash
 
-crontab -l |grep -v "gmetric -n roxie_instances -v" > /tmp/.cronTabCopy
+crontab -l |grep -v "gmetric -n roxie_instances -v" | grep -v "control:metrics" > /tmp/.cronTabCopy
 crontab /tmp/.cronTabCopy
 rm /tmp/.cronTabCopy

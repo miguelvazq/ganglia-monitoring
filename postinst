@@ -1,7 +1,8 @@
 #!/bin/bash
 
-crontab -l |grep -v "gmetric -n roxie_instances -v" > /tmp/.cronTabCopy
+crontab -l |grep -v "gmetric -n roxie_instances -v" | grep -v "control:metrics" > /tmp/.cronTabCopy
 echo "* * * * * /usr/bin/gmetric -n roxie_instances -v `ps -ef | grep -i "roxie --topology" | grep -v grep -c` -u instances -t uint32 > /dev/null" >> /tmp/.cronTabCopy
+echo "* * * * * /usr/bin/testsocket . "<control:metrics/>" > /tmp/.roxie_metrics" >> /tmp/.cronTabCopy
 crontab /tmp/.cronTabCopy
 
 

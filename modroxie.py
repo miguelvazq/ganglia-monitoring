@@ -20,6 +20,28 @@ def publish_to_ganglia(name, value, type, units):
 #        print 'output from gmetric :' +  output
 
 
+def roxie_handler_from_file(name):
+  try:
+    metrics_file = open('/tmp/.roxie_metrics', 'r')
+    output = metrics_file.read()  
+    metrics_file.close()
+
+#    print output
+    xp = etree.fromstring(output)
+    metrics = []
+
+    for child in xp[0][0]:
+#      print "name: " + child.attrib.get('name')
+#      print "value: " + child.attrib.get('value')
+      metrics.append((string.replace(child.attrib.get('name'),'\/', '_'), child.attrib.get('value')))
+      if string.replace(child.attrib.get('name'), '/', '_') == string.replace(name, '/', '_'):
+        print "name: " + child.attrib.get('name')
+        print "value: " + child.attrib.get('value')
+        return child.attrib.get('value')
+  except IOError:
+    print "IOError"
+    metrics_file.close()
+
 def roxie_handler(name):
   conf_file = '/etc/HPCCSystems/environment.conf'
 
@@ -85,7 +107,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'resultsReceived',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'results recv',
       'value_type' : 'uint',
@@ -97,7 +119,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'ibytiPacketsFromSelf_s',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'packets / sec',
       'value_type' : 'uint',
@@ -109,7 +131,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'restarts',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'restarts',
       'value_type' : 'uint',
@@ -121,7 +143,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'nodeCacheHits_s',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'hits / sec',
       'value_type' : 'uint',
@@ -133,7 +155,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'ibytiPacketsSent_s',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'packets / sec',
       'value_type' : 'uint',
@@ -145,7 +167,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'maxScanLength',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'length',
      'value_type': 'uint',
@@ -157,7 +179,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'ibytiPacketsWorked_s',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'worked / sec',
        'value_type': 'uint',
@@ -169,7 +191,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'hiMax_s',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'high max / sec',
        'value_type': 'uint',
@@ -181,7 +203,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'retriesIgnoredPrm',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'retries ignored',
       'value_type' : 'uint',
@@ -193,7 +215,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'retriesReceivedSec',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'retries recv',
       'value_type' : 'uint',
@@ -205,7 +227,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'loQueryActive_s',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'queries active',
       'value_type' : 'uint',
@@ -217,7 +239,7 @@ def metric_init(params):
 
   descriptors.append(
     { 'name' : 'retriesReceivedPrm_s',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'retries recv / sec',
       'value_type' : 'uint',
@@ -229,7 +251,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'nodeCacheHits',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'hits',
       'value_type' : 'uint',
@@ -241,7 +263,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'queryCount_s',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'query count / sec',
       'value_type' : 'uint',
@@ -253,7 +275,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'loQueryActive',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'active queries',
        'value_type': 'uint',
@@ -265,7 +287,7 @@ def metric_init(params):
  
   descriptors.append(
      {'name' : 'cacheAdds_s',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'cache adds / sec',
        'value_type': 'uint',
@@ -277,7 +299,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'unknownMin_s',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'unknown / sec',
       'value_type' : 'uint',
@@ -289,7 +311,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'packetsAbandoned',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'packets abandoned',
       'value_type' : 'uint',
@@ -301,7 +323,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'nodeCacheAdds',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'cache adds',
       'value_type' : 'uint',
@@ -313,7 +335,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'loAverage',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'low average',
       'value_type' : 'uint',
@@ -325,7 +347,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'slaQueryFailed_s',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'queries / sec',
       'value_type' : 'uint',
@@ -337,7 +359,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'preloadCacheHits',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'cache hits',
       'value_type' : 'uint',
@@ -349,7 +371,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'loMin',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'low min',
       'value_type' : 'uint',
@@ -361,7 +383,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'activitiesStarted',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'activities started',
       'value_type' : 'uint',
@@ -373,7 +395,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'diskReadStarted',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'starts',
       'value_type' : 'uint',
@@ -385,7 +407,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'globalLocks',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'locks',
       'value_type' : 'uint',
@@ -397,7 +419,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'retriesNeeded',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'retries',
       'value_type' : 'uint',
@@ -409,7 +431,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'ibytiPacketsSent',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'packets sent',
       'value_type' : 'uint',
@@ -421,7 +443,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'loMax',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'low max',
       'value_type' : 'uint',
@@ -433,7 +455,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'hiQueryActive_s',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'hi queries / sec',
       'value_type' : 'uint',
@@ -445,7 +467,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'hiQueryActive',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'hi active queries',
       'value_type' : 'uint',
@@ -457,7 +479,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'unknownQueryFailed',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'queries',
       'value_type' : 'queries failed',
@@ -469,7 +491,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'loQueryCount',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'low query count',
       'value_type' : 'uint',
@@ -481,7 +503,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'ibytiNoDelaysSec',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'no delays / sec',
       'value_type' : 'uint',
@@ -493,7 +515,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'loQueryCount_s',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'query count / sec',
       'value_type' : 'uint',
@@ -505,7 +527,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'unknownMin',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'min unknown',
       'value_type' : 'uint',
@@ -517,7 +539,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'packetsReceived',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'packets recv',
       'value_type' : 'uint',
@@ -529,7 +551,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'unwantedDiscarded_s',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'discarded / sec',
       'value_type' : 'uint',
@@ -541,7 +563,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'hiQueryFailed',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'hi failed queries',
       'value_type' : 'uint',
@@ -553,7 +575,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'rowsIn',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'rows in',
       'value_type' : 'uint',
@@ -565,7 +587,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'unknownQueryActive',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'active queries',
       'value_type' : 'uint',
@@ -577,7 +599,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'unknownMax_s',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'max unknown / sec',
       'value_type' : 'uint',
@@ -589,7 +611,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'retriesSent_s',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'retries sent / sec',
        'value_type': 'uint',
@@ -601,7 +623,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'ibytiNoDelaysPrm',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'no delays',
       'value_type' : 'uint',
@@ -613,7 +635,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'slaQueryActive_s',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'active queries / sec',
       'value_type' : 'uint',
@@ -625,7 +647,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'packetsAbandoned_s',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'pkts / sec',
       'value_type' : 'uint',
@@ -637,7 +659,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'slaMin_s',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'slaves min / sec',
       'value_type' : 'uint',
@@ -649,7 +671,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'totScanLength',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'length',
       'value_type' : 'uint',
@@ -661,7 +683,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'ibytiPacketsHalfWorked_s',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'packets / sec',
        'value_type': 'uint',
@@ -673,7 +695,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'slaMax',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'slave max',
        'value_type': 'uint',
@@ -685,7 +707,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'packetsReceived_s',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'packets / sec',
       'value_type' : 'uint',
@@ -697,7 +719,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'cacheHits',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'cache hits',
       'value_type' : 'uint',
@@ -709,7 +731,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'hiQueryFailed_s',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'queries / sec',
       'value_type' : 'uint',
@@ -721,7 +743,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'rowsIn_s',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'rows in / sec',
       'value_type' : 'uint',
@@ -733,7 +755,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'ibytiPacketsFromSelf',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'packets',
       'value_type' : 'uint',
@@ -745,7 +767,7 @@ def metric_init(params):
 
   descriptors.append(
      {'name' : 'slaQueryCount_s',
-      'call_back' : roxie_handler,
+      'call_back' : roxie_handler_from_file,
       'time_max' : 90,
       'units' : 'query count / sec',
       'value_type' : 'uint',
@@ -757,7 +779,7 @@ def metric_init(params):
 
   descriptors.append(
     {'name' : 'leafCacheHits',
-     'call_back' : roxie_handler,
+     'call_back' : roxie_handler_from_file,
      'time_max' : 90,
      'units' : 'cache hits',
       'value_type': 'uint',
@@ -769,7 +791,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'nodeCacheAdds_s',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'cache adds / sec',
      'value_type' : 'uint',
@@ -781,7 +803,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'leafCacheAdds_s',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'cache adds / sec',
      'value_type' : 'uint',
@@ -793,7 +815,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'unknownQueryCount_s',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'query count / sec',
      'value_type' : 'uint',
@@ -805,7 +827,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'cacheAdds',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'cache adds',
      'value_type' : 'uint',
@@ -817,7 +839,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'packetsRetried_s',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'packets retried / sec',
      'value_type' : 'uint',
@@ -829,7 +851,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'hiMax',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'hi max',
      'value_type' : 'uint',
@@ -841,7 +863,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'hiMin',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'hi min',
      'value_type' : 'uint',
@@ -853,7 +875,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'postFiltered_s',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'posts / sec',
      'value_type' : 'uint',
@@ -865,7 +887,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'unknownQueryFailed_s',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'queries / sec',
      'value_type' : 'uint',
@@ -877,7 +899,7 @@ def metric_init(params):
 
   descriptors.append(
     {'name' : 'ibytiNoDelaysSec_s',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'no delays sec / sec',
      'value_type' : 'uint',
@@ -889,7 +911,7 @@ def metric_init(params):
 
   descriptors.append(
     {'name' : 'maxQueueLength',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'queue length',
      'value_type' : 'uint',
@@ -901,7 +923,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'leafCacheAdds',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'adds',
      'value_type' : 'uint',
@@ -913,7 +935,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'packetsRetried',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'retries',
      'value_type' : 'uint',
@@ -925,7 +947,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'slavesActive',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'slaves active',
      'value_type' : 'uint',
@@ -937,7 +959,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'hiMin_s',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'hi min / sec',
      'value_type' : 'uint',
@@ -949,7 +971,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'hiAverage',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'hi avg',
      'value_type' : 'uint',
@@ -961,7 +983,7 @@ def metric_init(params):
 
 #  descriptors.append(
 #    {'name' : 'lastQueryTime',
-#    'call_back' : roxie_handler,
+#    'call_back' : roxie_handler_from_file,
 #    'time_max' : 90,
 #    'units' : 'query time',
 #       'value_type': 'uint',
@@ -973,7 +995,7 @@ def metric_init(params):
 
   descriptors.append(
     {'name' : 'packetsSent',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'packets',
      'value_type' : 'uint',
@@ -985,7 +1007,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'dataBufferPages',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'pages',
      'value_type' : 'uint',
@@ -997,7 +1019,7 @@ def metric_init(params):
 
   descriptors.append(
     {'name' : 'loMin_s',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'min / sec',
      'value_type' : 'uint',
@@ -1009,7 +1031,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'slaQueryFailed',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'queries',
      'value_type' : 'uint',
@@ -1021,7 +1043,7 @@ def metric_init(params):
 
   descriptors.append(
     {'name' : 'unknownAverage',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'avg',
      'value_type' : 'uint',
@@ -1033,7 +1055,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'resultsReceived_s',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'recv / sec',
      'value_type' : 'uint',
@@ -1045,7 +1067,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'unknownQueryCount',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'query count',
      'value_type' : 'uint',
@@ -1057,7 +1079,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'nodesLoaded',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'nodes',
      'value_type' : 'uint',
@@ -1069,7 +1091,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'preloadCacheAdds',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'adds',
      'value_type' : 'uint',
@@ -1081,7 +1103,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'meanScanLength',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'legnth',
      'value_type' : 'uint',
@@ -1093,7 +1115,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'unknownQueryActive_s',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'queries / sec',
      'value_type' : 'uint',
@@ -1105,7 +1127,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'retriesSent',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'retries sent',
      'value_type' : 'uint',
@@ -1117,7 +1139,7 @@ def metric_init(params):
 
   descriptors.append(
     {'name' : 'hiQueryCount_s',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'query count / sec',
      'value_type' : 'uint',
@@ -1129,7 +1151,7 @@ def metric_init(params):
 
   descriptors.append(
     {'name' : 'activitiesCompleted',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'activities completed',
      'value_type' : 'uint',
@@ -1141,7 +1163,7 @@ def metric_init(params):
 
   descriptors.append(
     {'name' : 'diskReadCompleted',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'disk reads completed',
      'value_type' : 'uint',
@@ -1153,7 +1175,7 @@ def metric_init(params):
 
   descriptors.append(
     {'name' : 'dataBuffersActive',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'buffers active',
      'value_type' : 'uint',
@@ -1165,7 +1187,7 @@ def metric_init(params):
 
   descriptors.append(
     {'name' : 'ibytiNoDelaysPrm_s',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'no delays prm / sec',
      'value_type' : 'uint',
@@ -1177,7 +1199,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'ibytiPacketsReceived',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'packets recv',
      'value_type' : 'uint',
@@ -1189,7 +1211,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'leafCacheHits_s',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'cache hits / sec',
      'value_type' : 'uint',
@@ -1201,7 +1223,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'slaAverage',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'slave avg',
      'value_type' : 'uint',
@@ -1213,7 +1235,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'retriesReceivedPrm',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'retries recv',
      'value_type' : 'uint',
@@ -1225,7 +1247,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'unwantedDiscarded',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'discarded',
      'value_type' : 'uint',
@@ -1237,7 +1259,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'slaMin',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'slaves',
      'value_type' : 'uint',
@@ -1249,7 +1271,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'retriesIgnoredSec_s',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'retries',
      'value_type' : 'uint',
@@ -1261,7 +1283,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'retriesReceivedSec_s',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'recv / s',
      'value_type' : 'uint',
@@ -1273,7 +1295,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'loQueryFailed_s',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'queries / sec',
      'value_type' : 'uint',
@@ -1285,7 +1307,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'maxSlavesActive',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'slaves active',
      'value_type' : 'uint',
@@ -1297,7 +1319,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'numFilesToProcess',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'files',
      'value_type' : 'uint',
@@ -1309,7 +1331,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'rowsOut_s',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'rows',
      'value_type' : 'uint',
@@ -1321,7 +1343,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'postFiltered',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'posts',
      'value_type' : 'uint',
@@ -1333,7 +1355,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'retriesNeeded_s',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'needed / sec',
      'value_type' : 'uint',
@@ -1345,7 +1367,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'slaMax_s',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'slaves',
      'value_type' : 'uint',
@@ -1357,7 +1379,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'ibytiPacketsTooLate',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'packets',
      'value_type' : 'uint',
@@ -1369,7 +1391,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'cacheHits_s',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'hits / sec',
      'value_type' : 'uint',
@@ -1381,7 +1403,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'totScans',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'scans',
      'value_type' : 'uint',
@@ -1393,7 +1415,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'slaQueryActive',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'queries active',
      'value_type' : 'uint',
@@ -1405,7 +1427,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'ibytiPacketsReceived_s',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'packets recv',
      'value_type' : 'uint',
@@ -1417,7 +1439,7 @@ def metric_init(params):
 
   descriptors.append(
     {'name' : 'indexRecordsRead',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'reads',
      'value_type' : 'uint',
@@ -1429,7 +1451,7 @@ def metric_init(params):
  
   descriptors.append(
     {'name' : 'rowsOut',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'rows',
      'value_type' : 'uint',
@@ -1441,7 +1463,7 @@ def metric_init(params):
 
   descriptors.append(
     {'name' : 'ibytiPacketsWorked',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'packets worked',
      'value_type' : 'uint',
@@ -1453,7 +1475,7 @@ def metric_init(params):
 
   descriptors.append(
     {'name' : 'queryCount',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'query count',
      'value_type' : 'uint',
@@ -1465,7 +1487,7 @@ def metric_init(params):
 
   descriptors.append(
     {'name' : 'ibytiPacketsTooLate_s',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'packets / sec',
      'value_type' : 'uint',
@@ -1477,7 +1499,7 @@ def metric_init(params):
 
   descriptors.append(
     {'name' : 'ibytiPacketsHalfWorked',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'packets',
      'value_type' : 'uint',
@@ -1489,7 +1511,7 @@ def metric_init(params):
 
   descriptors.append(
     {'name' : 'retriesIgnoredPrm_s',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'retries',
      'value_type' : 'uint',
@@ -1501,7 +1523,7 @@ def metric_init(params):
 
   descriptors.append(
     {'name' : 'hiQueryCount',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'query count',
      'value_type' : 'uint',
@@ -1513,7 +1535,7 @@ def metric_init(params):
 
   descriptors.append(
     {'name' : 'packetsSent_s',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'packets / sec',
      'value_type' : 'uint',
@@ -1525,7 +1547,7 @@ def metric_init(params):
 
   descriptors.append(
     {'name' : 'globalSignals',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'signals',
      'value_type' : 'uint',
@@ -1537,7 +1559,7 @@ def metric_init(params):
 
   descriptors.append(
     {'name' : 'unknownMax',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'unknown',
      'value_type' : 'uint',
@@ -1549,7 +1571,7 @@ def metric_init(params):
 
   descriptors.append(
     {'name' : 'slaQueryCount',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'query count',
      'value_type' : 'uint',
@@ -1561,7 +1583,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'indexRecordsRead_s',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'reads / sec',
      'value_type' : 'uint',
@@ -1573,7 +1595,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'loMax_s',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'low max / sec',
      'value_type' : 'uint',
@@ -1585,7 +1607,7 @@ def metric_init(params):
 
 #  descriptors.append(
 #    {'name' : 'lastQueryDate',
-#    'call_back' : roxie_handler,
+#    'call_back' : roxie_handler_from_file,
 #    'time_max' : 90,
 #    'units' : 'date',
 #     'value_type' : 'uint',
@@ -1597,7 +1619,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'retriesIgnoredSec',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'retries',
      'value_type' : 'uint',
@@ -1609,7 +1631,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'abortsSent',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'aborts',
      'value_type' : 'uint',
@@ -1621,7 +1643,7 @@ def metric_init(params):
 
   descriptors.append(
    {'name' : 'loQueryFailed',
-    'call_back' : roxie_handler,
+    'call_back' : roxie_handler_from_file,
     'time_max' : 90,
     'units' : 'queries',
      'value_type' : 'uint',
@@ -1644,7 +1666,8 @@ if __name__ == '__main__':
     counter = 0
     for d in descriptors:
 #        v = d['call_back'](d['name'], counter)
-        roxie_handler2(d['name'], counter)
+#        roxie_handler2(d['name'], counter)
+        roxie_handler_from_file(d['name'])
         counter += 1
 
 
