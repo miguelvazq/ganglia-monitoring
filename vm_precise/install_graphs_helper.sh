@@ -38,4 +38,4 @@ restart service gmetad
 killall gmond
 cp -sf /usr/sbin/gmond /etc/init.d/
 gmond
-
+apachectl -k restart
