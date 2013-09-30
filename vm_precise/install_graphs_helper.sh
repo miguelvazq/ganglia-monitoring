@@ -1,24 +1,40 @@
 #!/bin/bash
 
+# Installing Ganglia
 apt-get install ganglia-webfrontend gmetad ganglia-monitor python-lxml -y
 
+# Aliasing Apache web directory to use ganglia-webfrontend
 echo "Alias /ganglia /usr/share/ganglia-webfrontend" >> /etc/apache2/apache2.conf
+
+# Customizing demo VM names and labels
 sed 's/my cluster\" localhost/VM Cluster\" localhost/g' < /etc/ganglia/gmetad.conf > /tmp/gmetad.conf; mv /tmp/gmetad.conf /etc/ganglia/gmetad.conf
 echo "grid name \"VM Grid\"" >> /etc/ganglia/gmetad.conf
 
+# Installing HPCC specific settings for gmond data gathering.  This monitors the roxie service and gathers metrics for gmond.
 dpkg -i hpccsystems-ganglia-monitoring--precise_amd64.deb
 
+# Setting up VM settings to get graphs up and running.  This overwrites many of the installed files.
 cp -f ./conf.php /usr/share/ganglia-webfrontend/
-cp -f ./header.tpl  /usr/share/ganglia-webfrontend/
-cp -f ./host_view.tpl  /usr/share/ganglia-webfrontend/
-cp -f ./cluster_view.tpl  /usr/share/ganglia-webfrontend/
+
+cp -f ./header.tpl  /usr/share/ganglia-webfrontend/templates/default
+cp -f ./host_view.tpl  /usr/share/ganglia-webfrontend/templates/default
+cp -f ./cluster_view.tpl  /usr/share/ganglia-webfrontend/templates/default
+
 cp -f ./get_context.php /usr/share/ganglia-webfrontend/
 cp -f ./cluster_view.php /usr/share/ganglia-webfrontend/
-cp -f ./hpcc-logo.png /usr/share/ganglia-webfrontend/templates/default/image/
-cp -f ./query_count.php /usr/sahre/ganglia-webfrontend/graph.d
+
+cp -f ./query_count_report.php /usr/sahre/ganglia-webfrontend/graph.d
+cp -f ./query_count_s_report.php /usr/sahre/ganglia-webfrontend/graph.d
+cp -f ./roxie_instances_report.php /usr/sahre/ganglia-webfrontend/graph.d
+
 cp -f ./modpython.conf /etc/ganglia.conf.d
 
+cp -f ./hpcc-logo.png /usr/share/ganglia-webfrontend/templates/default/image/
+
+# Restarting ganglia metric aggregator
 restart service gmetad
+
+# Restarting gmond metric gathering process and setting it to start on reboots automatically
 killall gmond
 cp -s /usr/sbin/gmond /etc/init.d/
 gmond
