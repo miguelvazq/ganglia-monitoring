@@ -8,7 +8,7 @@ echo "Alias /ganglia /usr/share/ganglia-webfrontend" >> /etc/apache2/apache2.con
 
 # Customizing demo VM names and labels
 sed 's/my cluster\" localhost/VM Cluster\" localhost/g' < /etc/ganglia/gmetad.conf > /tmp/gmetad.conf; mv /tmp/gmetad.conf /etc/ganglia/gmetad.conf
-echo "grid name \"VM Grid\"" >> /etc/ganglia/gmetad.conf
+echo "gridname \"VM Grid\"" >> /etc/ganglia/gmetad.conf
 
 # Installing HPCC specific settings for gmond data gathering.  This monitors the roxie service and gathers metrics for gmond.
 dpkg -i hpccsystems-ganglia-monitoring--precise_amd64.deb
