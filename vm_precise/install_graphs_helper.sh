@@ -28,6 +28,7 @@ cp -f ./query_count_s_report.php /usr/share/ganglia-webfrontend/graph.d
 cp -f ./roxie_instances_report.php /usr/share/ganglia-webfrontend/graph.d
 
 cp -f ./modpython.conf /etc/ganglia/conf.d
+cp -f ./gmond.conf /etc/ganglia
 
 cp -f ./hpcc_logo.png /usr/share/ganglia-webfrontend/templates/default/images/
 
