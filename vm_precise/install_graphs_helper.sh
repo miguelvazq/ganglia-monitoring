@@ -38,4 +38,6 @@ restart service gmetad
 killall gmond
 cp -sf /usr/sbin/gmond /etc/init.d/
 gmond
+
+# Restarting apache
 apachectl -k restart
