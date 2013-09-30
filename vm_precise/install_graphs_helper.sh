@@ -36,6 +36,6 @@ restart service gmetad
 
 # Restarting gmond metric gathering process and setting it to start on reboots automatically
 killall gmond
-cp -s /usr/sbin/gmond /etc/init.d/
+cp -sf /usr/sbin/gmond /etc/init.d/
 gmond
 
