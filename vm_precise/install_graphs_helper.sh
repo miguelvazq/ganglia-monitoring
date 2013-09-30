@@ -23,9 +23,9 @@ cp -f ./cluster_view.tpl  /usr/share/ganglia-webfrontend/templates/default
 cp -f ./get_context.php /usr/share/ganglia-webfrontend/
 cp -f ./cluster_view.php /usr/share/ganglia-webfrontend/
 
-cp -f ./query_count_report.php /usr/sahre/ganglia-webfrontend/graph.d
-cp -f ./query_count_s_report.php /usr/sahre/ganglia-webfrontend/graph.d
-cp -f ./roxie_instances_report.php /usr/sahre/ganglia-webfrontend/graph.d
+cp -f ./query_count_report.php /usr/share/ganglia-webfrontend/graph.d
+cp -f ./query_count_s_report.php /usr/share/ganglia-webfrontend/graph.d
+cp -f ./roxie_instances_report.php /usr/share/ganglia-webfrontend/graph.d
 
 cp -f ./modpython.conf /etc/ganglia.conf.d
 
