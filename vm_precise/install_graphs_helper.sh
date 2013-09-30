@@ -29,7 +29,7 @@ cp -f ./roxie_instances_report.php /usr/share/ganglia-webfrontend/graph.d
 
 cp -f ./modpython.conf /etc/ganglia.conf.d
 
-cp -f ./hpcc_logo.png /usr/share/ganglia-webfrontend/templates/default/image/
+cp -f ./hpcc_logo.png /usr/share/ganglia-webfrontend/templates/default/images/
 
 # Restarting ganglia metric aggregator
 restart service gmetad
