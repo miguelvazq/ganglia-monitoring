@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Installing Ganglia
-apt-get install ganglia-webfrontend gmetad ganglia-monitor python-lxml collectd-core ganglia-monitor python-lxml libltdl7 libganglia1 libapr1 libconfuse0 libxslt1.1 libconfuse-common -y
+# apt-get install ganglia-webfrontend gmetad ganglia-monitor python-lxml collectd-core ganglia-monitor python-lxml libltdl7 libganglia1 libapr1 libconfuse0 libxslt1.1 libconfuse-common -y
 
 # Aliasing Apache web directory to use ganglia-webfrontend
 echo "Alias /ganglia /usr/share/ganglia-webfrontend" >> /etc/apache2/apache2.conf
