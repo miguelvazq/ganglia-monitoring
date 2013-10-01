@@ -1,9 +1,12 @@
 #!/usr/bin/expect
 
 spawn apt-get install ganglia-webfrontend gmetad ganglia-monitor python-lxml collectd-core ganglia-monitor python-lxml libltdl7 libganglia1 libapr1 libconfuse0 libxslt1.1 libconfuse-common -y
+expect "Restart apache2?"
 expect "<No>"
 send  "\r"
+expect "Restart apache2?"
 expect "<No>"
 send "\r"
-spawn sh ./install_graphs_helper.sh >> install.log
+spawn ./install_graphs_helper.sh
+sleep 10
 
