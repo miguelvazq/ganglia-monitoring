@@ -32,13 +32,19 @@ cp -f ./gmond.conf /etc/ganglia
 
 cp -f ./hpcc_logo.png /usr/share/ganglia-webfrontend/templates/default/images/
 
-# Restarting ganglia metric aggregator
-service gmetad restart
 
-# Restarting gmond metric gathering process and setting it to start on reboots automatically
-killall gmond
+# Set gmond to start on reboot
 cp -sf /usr/sbin/gmond /etc/init.d/
-gmond
 
-# Restarting apache
-apachectl -k restart
+
+
+service gmetad stop
+killall gmond
+gmond
+apachectl -k stop
+
+rm -rf /var/lib/ganglia/rrds/*
+
+service gmetad start
+gmond
+apacectl -k start
