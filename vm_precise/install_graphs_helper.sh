@@ -47,4 +47,4 @@ rm -rf /var/lib/ganglia/rrds/*
 
 service gmetad start
 gmond
-apacectl -k start
+apachectl -k start
