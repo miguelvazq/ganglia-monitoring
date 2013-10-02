@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Prerequistes
-# apt-get install ganglia-webfrontend gmetad ganglia-monitor python-lxml collectd-core ganglia-monitor python-lxml libltdl7 libganglia1 libapr1 libconfuse0 libxslt1.1 libconfuse-common -y
+# apt-get install ganglia-webfrontend gmetad ganglia-monitor python-lxml collectd-core libltdl7 libganglia1 libapr1 libconfuse0 libxslt1.1 libconfuse-common -y
 # dpkg -i hpccsystems-ganglia-monitoring--precise_*.deb
 
 # Aliasing Apache web directory to use ganglia-webfrontend
@@ -35,6 +35,8 @@ cp -f ./query_count_s_report.php /usr/share/ganglia-webfrontend/graph.d
 echo "copying roxie_instances.php to /usr/share/ganglia-webfrontend/graph.d"
 cp -f ./roxie_instances_report.php /usr/share/ganglia-webfrontend/graph.d
 
+echo "mkdir /etc/ganglia/conf.d"
+mkdir /etc/ganglia/conf.d
 echo "copying modpython.conf to /etc/ganglia/conf.d/"
 cp -f ./modpython.conf /etc/ganglia/conf.d
 echo "copying gmond.conf to /etc/ganglia/"
@@ -53,10 +55,11 @@ service gmetad stop
 killall gmond
 gmond
 apachectl -k stop
+sleep 5
 
 rm -rf /var/lib/ganglia/rrds/*
 
-service gmetad start
+service gmetad restart
 gmond
-apachectl -k start
+apachectl -k restart
 echo "Done!"
