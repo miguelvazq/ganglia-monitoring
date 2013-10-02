@@ -111,7 +111,7 @@ def metric_init(params):
       'time_max' : 90,
       'units' : 'results recv',
       'value_type' : 'uint',
-      'slope:' : 'positive',
+      'slope:' : 'both',
       'format' : '%u',
       'description' : 'Total Results Received',
       'groups' : 'roxie' }
@@ -135,7 +135,7 @@ def metric_init(params):
       'time_max' : 90,
       'units' : 'restarts',
       'value_type' : 'uint',
-      'slope:' : 'positive',
+      'slope:' : 'both',
       'format' : '%u',
       'description' : 'Total Restarts',
       'groups' : 'roxie' }
@@ -171,7 +171,7 @@ def metric_init(params):
       'time_max' : 90,
       'units' : 'length',
      'value_type': 'uint',
-      'slope:' : 'positive',
+      'slope:' : 'both',
       'format' : '%u',
       'description' : 'Max Scan Length',
       'groups' : 'roxie' }
@@ -207,7 +207,7 @@ def metric_init(params):
       'time_max' : 90,
       'units' : 'retries ignored',
       'value_type' : 'uint',
-      'slope:' : 'positive',
+      'slope:' : 'both',
       'format' : '%u',
       'description' : 'Retries Ignored Prm',
       'groups' : 'roxie' }
@@ -255,7 +255,7 @@ def metric_init(params):
       'time_max' : 90,
       'units' : 'hits',
       'value_type' : 'uint',
-      'slope:' : 'positive',
+      'slope:' : 'both',
       'format' : '%u',
       'description' : 'Node Cache Hits',
       'groups' : 'roxie' }
@@ -315,7 +315,7 @@ def metric_init(params):
       'time_max' : 90,
       'units' : 'packets abandoned',
       'value_type' : 'uint',
-      'slope:' : 'positive',
+      'slope:' : 'both',
       'format' : '%u',
       'description' : 'Packets Abandoned',
       'groups' : 'roxie' }
@@ -327,7 +327,7 @@ def metric_init(params):
       'time_max' : 90,
       'units' : 'cache adds',
       'value_type' : 'uint',
-      'slope:' : 'positive',
+      'slope:' : 'both',
       'format' : '%u',
       'description' : 'Node Cache Adds',
       'groups' : 'roxie' }
@@ -471,7 +471,7 @@ def metric_init(params):
       'time_max' : 90,
       'units' : 'hi active queries',
       'value_type' : 'uint',
-      'slope:' : 'positive',
+      'slope:' : 'both',
       'format' : '%u',
       'description' : 'High Query Active',
       'groups' : 'roxie' }
@@ -483,7 +483,7 @@ def metric_init(params):
       'time_max' : 90,
       'units' : 'queries',
       'value_type' : 'queries failed',
-      'slope:' : 'positive',
+      'slope:' : 'both',
       'format' : '%u',
       'description' : 'Unknown Query Failed',
       'groups' : 'roxie' }
@@ -495,7 +495,7 @@ def metric_init(params):
       'time_max' : 90,
       'units' : 'low query count',
       'value_type' : 'uint',
-      'slope:' : 'positive',
+      'slope:' : 'both',
       'format' : '%u',
       'description' : 'Low Query Count',
       'groups' : 'roxie' }
@@ -507,7 +507,7 @@ def metric_init(params):
       'time_max' : 90,
       'units' : 'no delays / sec',
       'value_type' : 'uint',
-      'slope:' : 'positive',
+      'slope:' : 'both',
       'format' : '%u',
       'description' : 'IBYTI No Delays Sec',
       'groups' : 'roxie' }
@@ -543,7 +543,7 @@ def metric_init(params):
       'time_max' : 90,
       'units' : 'packets recv',
       'value_type' : 'uint',
-      'slope:' : 'positive',
+      'slope:' : 'both',
       'format' : '%u',
       'description' : 'Packets Received',
       'groups' : 'roxie' }
@@ -567,7 +567,7 @@ def metric_init(params):
       'time_max' : 90,
       'units' : 'hi failed queries',
       'value_type' : 'uint',
-      'slope:' : 'positive',
+      'slope:' : 'both',
       'format' : '%u',
       'description' : 'High Query Failed',
       'groups' : 'roxie' }
@@ -579,7 +579,7 @@ def metric_init(params):
       'time_max' : 90,
       'units' : 'rows in',
       'value_type' : 'uint',
-      'slope:' : 'positive',
+      'slope:' : 'both',
       'format' : '%u',
       'description' : 'Rows In',
       'groups' : 'roxie' }
@@ -627,7 +627,7 @@ def metric_init(params):
       'time_max' : 90,
       'units' : 'no delays',
       'value_type' : 'uint',
-      'slope:' : 'positive',
+      'slope:' : 'both',
       'format' : '%u',
       'description' : 'IBYTI No Delays Prm',
       'groups' : 'roxie' }
@@ -675,7 +675,7 @@ def metric_init(params):
       'time_max' : 90,
       'units' : 'length',
       'value_type' : 'uint',
-      'slope:' : 'positive',
+      'slope:' : 'both',
       'format' : '%u',
       'description' : 'Total Scan Length',
       'groups' : 'roxie' }
@@ -699,7 +699,7 @@ def metric_init(params):
       'time_max' : 90,
       'units' : 'slave max',
        'value_type': 'uint',
-      'slope:' : 'positive',
+      'slope:' : 'both',
       'format' : '%u',
       'description' : 'Slave Max',
       'groups' : 'roxie' }
@@ -711,7 +711,7 @@ def metric_init(params):
       'time_max' : 90,
       'units' : 'packets / sec',
       'value_type' : 'uint',
-      'slope:' : 'positive',
+      'slope:' : 'both',
       'format' : '%u',
       'description' : 'Packets Received / sec',
       'groups' : 'roxie' }
@@ -723,7 +723,7 @@ def metric_init(params):
       'time_max' : 90,
       'units' : 'cache hits',
       'value_type' : 'uint',
-      'slope:' : 'positive',
+      'slope:' : 'both',
       'format' : '%u',
       'description' : 'Cache Hits',
       'groups' : 'roxie' }
@@ -759,7 +759,7 @@ def metric_init(params):
       'time_max' : 90,
       'units' : 'packets',
       'value_type' : 'uint',
-      'slope:' : 'positive',
+      'slope:' : 'both',
       'format' : '%u',
       'description' : 'IBYTI Packets From Self',
       'groups' : 'roxie' }
@@ -783,7 +783,7 @@ def metric_init(params):
      'time_max' : 90,
      'units' : 'cache hits',
       'value_type': 'uint',
-     'slope:' : 'positive',
+     'slope:' : 'both',
      'format' : '%u',
      'description' : 'Leaf Cache Hits',
      'groups' : 'roxie' }
@@ -831,7 +831,7 @@ def metric_init(params):
     'time_max' : 90,
     'units' : 'cache adds',
      'value_type' : 'uint',
-    'slope:' : 'positive',
+    'slope:' : 'both',
     'format' : '%u',
     'description' : 'Cache Adds',
     'groups' : 'roxie' }
@@ -855,7 +855,7 @@ def metric_init(params):
     'time_max' : 90,
     'units' : 'hi max',
      'value_type' : 'uint',
-    'slope:' : 'positive',
+    'slope:' : 'both',
     'format' : '%u',
     'description' : 'High Max',
     'groups' : 'roxie' }
@@ -867,7 +867,7 @@ def metric_init(params):
     'time_max' : 90,
     'units' : 'hi min',
      'value_type' : 'uint',
-    'slope:' : 'positive',
+    'slope:' : 'both',
     'format' : '%u',
     'description' : 'Hi Min',
     'groups' : 'roxie' }
@@ -927,7 +927,7 @@ def metric_init(params):
     'time_max' : 90,
     'units' : 'adds',
      'value_type' : 'uint',
-    'slope:' : 'positive',
+    'slope:' : 'both',
     'format' : '%u',
     'description' : 'Lead Cache Adds',
     'groups' : 'roxie' }
@@ -939,7 +939,7 @@ def metric_init(params):
     'time_max' : 90,
     'units' : 'retries',
      'value_type' : 'uint',
-    'slope:' : 'positive',
+    'slope:' : 'both',
     'format' : '%u',
     'description' : 'Packets Retried',
     'groups' : 'roxie' }
@@ -975,7 +975,7 @@ def metric_init(params):
     'time_max' : 90,
     'units' : 'hi avg',
      'value_type' : 'uint',
-    'slope:' : 'positive',
+    'slope:' : 'both',
     'format' : '%u',
     'description' : 'Hi Average',
     'groups' : 'roxie' }
@@ -999,7 +999,7 @@ def metric_init(params):
     'time_max' : 90,
     'units' : 'packets',
      'value_type' : 'uint',
-    'slope:' : 'positive',
+    'slope:' : 'both',
     'format' : '%u',
     'description' : 'Packets Sent',
     'groups' : 'roxie' }
@@ -1035,7 +1035,7 @@ def metric_init(params):
     'time_max' : 90,
     'units' : 'queries',
      'value_type' : 'uint',
-    'slope:' : 'positive',
+    'slope:' : 'both',
     'format' : '%u',
     'description' : 'Slave Query Failed',
     'groups' : 'roxie' }
@@ -1071,7 +1071,7 @@ def metric_init(params):
     'time_max' : 90,
     'units' : 'query count',
      'value_type' : 'uint',
-    'slope:' : 'positive',
+    'slope:' : 'both',
     'format' : '%u',
     'description' : 'Unknown Query Count',
     'groups' : 'roxie' }
@@ -1095,7 +1095,7 @@ def metric_init(params):
     'time_max' : 90,
     'units' : 'adds',
      'value_type' : 'uint',
-    'slope:' : 'positive',
+    'slope:' : 'both',
     'format' : '%u',
     'description' : 'Preload Cache Adds',
     'groups' : 'roxie' }
@@ -1131,7 +1131,7 @@ def metric_init(params):
     'time_max' : 90,
     'units' : 'retries sent',
      'value_type' : 'uint',
-    'slope:' : 'positive',
+    'slope:' : 'both',
     'format' : '%u',
     'description' : 'Retries Sent',
     'groups' : 'roxie' }
@@ -1155,7 +1155,7 @@ def metric_init(params):
     'time_max' : 90,
     'units' : 'activities completed',
      'value_type' : 'uint',
-    'slope:' : 'positive',
+    'slope:' : 'both',
     'format' : '%u',
     'description' : 'Activities Completed',
     'groups' : 'roxie' }
@@ -1167,7 +1167,7 @@ def metric_init(params):
     'time_max' : 90,
     'units' : 'disk reads completed',
      'value_type' : 'uint',
-    'slope:' : 'positive',
+    'slope:' : 'both',
     'format' : '%u',
     'description' : 'Disk Read Completed',
     'groups' : 'roxie' }
@@ -1203,7 +1203,7 @@ def metric_init(params):
     'time_max' : 90,
     'units' : 'packets recv',
      'value_type' : 'uint',
-    'slope:' : 'positive',
+    'slope:' : 'both',
     'format' : '%u',
     'description' : 'IBYTI Packets Received',
     'groups' : 'roxie' }
@@ -1215,7 +1215,7 @@ def metric_init(params):
     'time_max' : 90,
     'units' : 'cache hits / sec',
      'value_type' : 'uint',
-    'slope:' : 'positive',
+    'slope:' : 'both',
     'format' : '%u',
     'description' : 'Leaf Cache Hits / sec',
     'groups' : 'roxie' }
@@ -1239,7 +1239,7 @@ def metric_init(params):
     'time_max' : 90,
     'units' : 'retries recv',
      'value_type' : 'uint',
-    'slope:' : 'positive',
+    'slope:' : 'both',
     'format' : '%u',
     'description' : 'Retries Received Prm',
     'groups' : 'roxie' }
@@ -1251,7 +1251,7 @@ def metric_init(params):
     'time_max' : 90,
     'units' : 'discarded',
      'value_type' : 'uint',
-    'slope:' : 'positive',
+    'slope:' : 'both',
     'format' : '%u',
     'description' : 'Unwanted Discarded',
     'groups' : 'roxie' }
@@ -1347,7 +1347,7 @@ def metric_init(params):
     'time_max' : 90,
     'units' : 'posts',
      'value_type' : 'uint',
-    'slope:' : 'positive',
+    'slope:' : 'both',
     'format' : '%u',
     'description' : 'POST filtered',
     'groups' : 'roxie' }
@@ -1383,7 +1383,7 @@ def metric_init(params):
     'time_max' : 90,
     'units' : 'packets',
      'value_type' : 'uint',
-    'slope:' : 'positive',
+    'slope:' : 'both',
     'format' : '%u',
     'description' : 'IBYTI Packets Too Late',
     'groups' : 'roxie' }
@@ -1407,7 +1407,7 @@ def metric_init(params):
     'time_max' : 90,
     'units' : 'scans',
      'value_type' : 'uint',
-    'slope:' : 'positive',
+    'slope:' : 'both',
     'format' : '%u',
     'description' : 'Total Scans',
     'groups' : 'roxie' }
@@ -1419,7 +1419,7 @@ def metric_init(params):
     'time_max' : 90,
     'units' : 'queries active',
      'value_type' : 'uint',
-    'slope:' : 'positive',
+    'slope:' : 'both',
     'format' : '%u',
     'description' : 'Slave Queries Active',
     'groups' : 'roxie' }
@@ -1443,7 +1443,7 @@ def metric_init(params):
     'time_max' : 90,
     'units' : 'reads',
      'value_type' : 'uint',
-    'slope:' : 'positive',
+    'slope:' : 'both',
     'format' : '%u',
     'description' : 'Index Records Read',
     'groups' : 'roxie' }
@@ -1467,7 +1467,7 @@ def metric_init(params):
     'time_max' : 90,
     'units' : 'packets worked',
      'value_type' : 'uint',
-    'slope:' : 'positive',
+    'slope:' : 'both',
     'format' : '%u',
     'description' : 'IBYTI Packets Worked',
     'groups' : 'roxie' }
@@ -1479,7 +1479,7 @@ def metric_init(params):
     'time_max' : 90,
     'units' : 'query count',
      'value_type' : 'uint',
-    'slope:' : 'positive',
+    'slope:' : 'both',
     'format' : '%u',
     'description' : 'Query Count',
     'groups' : 'roxie' }
@@ -1527,7 +1527,7 @@ def metric_init(params):
     'time_max' : 90,
     'units' : 'query count',
      'value_type' : 'uint',
-    'slope:' : 'positive',
+    'slope:' : 'both',
     'format' : '%u',
     'description' : 'High Query Count',
     'groups' : 'roxie' }
@@ -1563,7 +1563,7 @@ def metric_init(params):
     'time_max' : 90,
     'units' : 'unknown',
      'value_type' : 'uint',
-    'slope:' : 'positive',
+    'slope:' : 'both',
     'format' : '%u',
     'description' : 'Unknown Max',
     'groups' : 'roxie' }
@@ -1575,7 +1575,7 @@ def metric_init(params):
     'time_max' : 90,
     'units' : 'query count',
      'value_type' : 'uint',
-    'slope:' : 'positive',
+    'slope:' : 'both',
     'format' : '%u',
     'description' : 'Slave Query Count',
     'groups' : 'roxie' }
@@ -1635,7 +1635,7 @@ def metric_init(params):
     'time_max' : 90,
     'units' : 'aborts',
      'value_type' : 'uint',
-    'slope:' : 'positive',
+    'slope:' : 'both',
     'format' : '%u',
     'description' : 'Aborts Sent',
     'groups' : 'roxie' }
