@@ -11,7 +11,7 @@ echo "Alias /ganglia /usr/share/ganglia-webfrontend" >> /etc/apache2/apache2.con
 # Customizing demo VM names and labels
 echo "Updatating gmetad.conf..."; \
 sed 's/my cluster\" localhost/VM Cluster\" localhost/g' < /etc/ganglia/gmetad.conf > /tmp/gmetad.conf; mv /tmp/gmetad.conf /etc/ganglia/gmetad.conf; \
-echo "gridname \"VM Grid\"" >> /etc/ganglia/gmetad.conf; \
+echo "gridname \"VM\"" >> /etc/ganglia/gmetad.conf; \
 \
 # Setting up VM settings to get graphs up and running.  This overwrites many of the installed files.
 echo "copying header.tpl to /usr/share/ganglia-webfrontend/templates/default"; \
