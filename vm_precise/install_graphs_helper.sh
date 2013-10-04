@@ -32,7 +32,7 @@ cp -f ./hpcc_logo.png /usr/share/ganglia-webfrontend/templates/default/images/; 
 \
 \
 # Set gmond to start on reboot
-cp -sf /usr/sbin/gmond /etc/init.d/; \
+cp ./gmond-start.conf /etc/init/; \
 \
 service gmetad stop; \
 killall gmond; \
