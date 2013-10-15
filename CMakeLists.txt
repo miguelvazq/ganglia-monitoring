@@ -18,7 +18,12 @@ if (NOT LICENSE_FILE)
     set (LICENSE_FILE "LICENSE.txt")
 endif()
 
+include (${HPCC_GM_SOURCE_DIR}/version.cmake)
 include (${HPCC_GM_SOURCE_DIR}/cmake_modules/gmCommonSetup.cmake)
+SET(CPACK_PACKAGE_VERSION_MAJOR ${majorver})
+SET(CPACK_PACKAGE_VERSION_MINOR ${minorver})
+SET(CPACK_PACKAGE_VERSION_PATCH ${point}${stagever})
+
 
 set (CPACK_PACKAGE_CONTACT "HPCCSystems <ossdevelopment@lexisnexis.com>")
 set (CPACK_SOURCE_GENERATOR TGZ )

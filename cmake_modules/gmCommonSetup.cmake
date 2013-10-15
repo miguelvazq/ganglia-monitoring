@@ -42,4 +42,24 @@ IF ("${COMMONSETUP_DONE}" STREQUAL "")
   endif ()
   message ("-- Making ${CMAKE_BUILD_TYPE} system")
 
+  # Build tag generation
+
+  set(majorver ${HPCC_MAJOR})
+  set(minorver ${HPCC_MINOR})
+  set(point ${HPCC_POINT})
+  if ( "${HPCC_MATURITY}" STREQUAL "release" )
+    set(stagever "${HPCC_SEQUENCE}")
+  else()
+    set(stagever "${HPCC_MATURITY}${HPCC_SEQUENCE}")
+  endif()
+  set(version ${majorver}.${minorver}.${point})
+
+  IF ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
+    set( stagever "${stagever}Debug" )
+  ENDIF ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
+
+  ###########################################################################
+
+
+
 endif()
