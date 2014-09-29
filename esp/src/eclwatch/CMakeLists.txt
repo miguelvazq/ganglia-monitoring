@@ -1,5 +1,5 @@
 ################################################################################
-#    HPCC SYSTEMS software Copyright (C) 2014 HPCC Systems.
+#    HPCC SYSTEMS software Copyright (C) 2012 HPCC Systems.
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -13,7 +13,10 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 ################################################################################
-HPCC_ADD_SUBDIRECTORY (scm)
-HPCC_ADD_SUBDIRECTORY (services/ws_rrd)
-HPCC_ADD_SUBDIRECTORY (src)
-HPCC_ADD_SUBDIRECTORY (files)
+
+add_subdirectory (css)
+add_subdirectory (img)
+add_subdirectory (nls)
+add_subdirectory (templates)
+
+install ( FILES GangliaFilterDropDownWidget.js GangliaSelectWidget.js HPCCPlatformOpsWidget.js WsRrd.js DESTINATION componentfiles/files/eclwatch )
