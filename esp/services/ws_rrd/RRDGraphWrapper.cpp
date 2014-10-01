@@ -270,7 +270,10 @@ char* CRRDGraphWrapper::CUniquePath::getTempPath(char *pUniqueName)
     char pTempFile[DEFAULT_ARR_SIZE] = "";
 
     strncpy(pTempFile, pTempFileTemplate,  DEFAULT_ARR_SIZE);
-    mkstemp(pTempFile);
+
+    int tempFile = mkstemp(pTempFile);
+
+    close(tempFile);
 
     sprintf(pUniqueName, "%s%c%s", m_strTempDirectory.str(), PATHSEPCHAR, pTempFile);
 
