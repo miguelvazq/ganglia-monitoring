@@ -38,7 +38,7 @@ CONFIGURE_FILE(${HPCC_SOURCE_DIR}/build-config.h.cmake "build-config.h" )
 
 HPCC_ADD_SUBDIRECTORY (esp)
 HPCC_ADD_SUBDIRECTORY (initfiles)
-HPCC_ADD_SUBDIRECTORY (scripts)
+#HPCC_ADD_SUBDIRECTORY (scripts)
 
 CONFIGURE_FILE( "postinst.in" "postinst" )
 CONFIGURE_FILE( "postrm.in" "postrm" )
