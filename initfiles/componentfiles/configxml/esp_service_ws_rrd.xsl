@@ -46,7 +46,7 @@ xmlns:set="http://exslt.org/sets" exclude-result-prefixes="set">
                 <xsl:with-param name="plugin" select="'ws_rrd'"/>
             </xsl:call-template>
         </xsl:variable>
-        <EspService name="{$serviceName}" type="{$serviceType}" plugin="{$servicePlugin}" folderName="eclwatch" widgetName="HPCCPlatformPluginsWidget" shortName="Ganglia" longName="Ganglia Monitoring Plugin"/>
+        <EspService name="{$serviceName}" type="{$serviceType}" plugin="{$servicePlugin}" folderName="ganglia" widgetName="GangliaWidget" shortName="Ganglia" longName="Ganglia Monitoring Plugin"/>
         <EspBinding name="{$bindName}" service="{$serviceName}" protocol="{$bindingNode/@protocol}" type="{$bindType}"
              plugin="{$servicePlugin}" netAddress="0.0.0.0" port="{$bindingNode/@port}" defaultBinding="false">
             <xsl:call-template name="bindAuthentication">
