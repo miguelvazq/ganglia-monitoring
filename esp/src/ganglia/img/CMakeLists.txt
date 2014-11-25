@@ -13,6 +13,6 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 ################################################################################
-HPCC_ADD_SUBDIRECTORY (scm)
-HPCC_ADD_SUBDIRECTORY (services/ws_rrd)
-HPCC_ADD_SUBDIRECTORY (src)
+
+INSTALL( FILES ${iFiles} DESTINATION componentfiles/files/ganglia/img/ganglia.png COMPONENT Runtime )
+

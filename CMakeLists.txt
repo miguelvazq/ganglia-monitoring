@@ -35,7 +35,7 @@ SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -frtti -fPIC -fmessage-length=0 -Wforma
 MESSAGE (HPCC_SOURCE_DIR: ${HPCC_SOURCE_DIR})
 ADD_SUBDIRECTORY(${HPCC_SOURCE_DIR} oss EXCLUDE_FROM_ALL)
 CONFIGURE_FILE(${HPCC_SOURCE_DIR}/build-config.h.cmake "build-config.h" )
-CONFIGURE_FILE(${HPCC_SOURCE_DIR}/scripts/getMetrics.sh.in getMetrics.sh" )
+CONFIGURE_FILE(${HPCC_GM_SOURCE_DIR}/scripts/getMetrics.sh.in "getMetrics.sh" )
 
 
 HPCC_ADD_SUBDIRECTORY (esp)

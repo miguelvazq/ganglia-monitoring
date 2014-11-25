@@ -13,6 +13,18 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 ################################################################################
-HPCC_ADD_SUBDIRECTORY (scm)
-HPCC_ADD_SUBDIRECTORY (services/ws_rrd)
-HPCC_ADD_SUBDIRECTORY (src)
+
+HPCC_ADD_SUBDIRECTORY (css)
+HPCC_ADD_SUBDIRECTORY (img)
+HPCC_ADD_SUBDIRECTORY (nls)
+HPCC_ADD_SUBDIRECTORY (templates)
+
+FOREACH( iFILES
+	${CMAKE_CURRENT_SOURCE_DIR}/GangliaFilterDropDownWidget.js
+	${CMAKE_CURRENT_SOURCE_DIR}/GangliaWidget.js
+	${CMAKE_CURRENT_SOURCE_DIR}/WsRrd.js
+	${CMAKE_CURRENT_SOURCE_DIR}/ganglia.json
+)
+
+	INSTALL( FILES ${iFILES} DESTINATION componentfiles/files/ganglia COMPONENT Runtime )
+ENDFOREACH( iFILES ) 

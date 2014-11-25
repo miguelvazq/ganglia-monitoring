@@ -13,6 +13,5 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 ################################################################################
-HPCC_ADD_SUBDIRECTORY (scm)
-HPCC_ADD_SUBDIRECTORY (services/ws_rrd)
-HPCC_ADD_SUBDIRECTORY (src)
+HPCC_ADD_SUBDIRECTORY (ganglia)
+
