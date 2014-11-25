@@ -43,7 +43,7 @@ define([
     "./WsRrd",
     "hpcc/_TabContainerWidget",
 
-    "dojo/text!../templates/GangliaWidget.html",
+    "dojo/text!./templates/GangliaWidget.html",
 
     "dijit/layout/BorderContainer",
     "dijit/layout/TabContainer",

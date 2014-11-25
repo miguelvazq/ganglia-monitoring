@@ -17,7 +17,7 @@ define([
     "dojo/_base/declare",
     "dojo/_base/lang",
     "dojo/i18n",
-    "dojo/i18n!./nls/hpcc",
+    "dojo/i18n!./nls/ganglia",
     "dojo/_base/array",
     "dojo/dom",
     "dojo/dom-form",
@@ -28,7 +28,7 @@ define([
 
     "hpcc/_Widget",
 
-    "dojo/text!../templates/GangliaFilterDropDownWidget.html",
+    "dojo/text!./templates/GangliaFilterDropDownWidget.html",
 
     "dijit/form/DropDownButton",
     "dijit/TooltipDialog",
