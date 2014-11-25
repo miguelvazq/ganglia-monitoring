@@ -5,9 +5,11 @@ define({root:
     CurrentEpoch: "Current Epoch Time",
     CustomMonitoring: "Custom Monitoring",
     Default: "Default",
+    FromDate: "From Date",
     Ganglia: "Ganglia",
     GenerateGraph: "Generate Graph",
     Metrics: "Metrics",
+    OpenInNewPage: "Open in new page",
     Server: "Server"
 }),
 "bs": true,
