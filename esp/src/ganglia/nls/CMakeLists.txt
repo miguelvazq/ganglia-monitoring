@@ -14,12 +14,12 @@
 #    limitations under the License.
 ################################################################################
 
-INSTALL( FILES ${CMAKE_CURRENT_SOURCE_DIR}/ganglia.js DESTINATION componentfiles/files/ganglia/nls/ganglia.js COMPONENT Runtime )
-INSTALL( FILES ${CMAKE_CURRENT_SOURCE_DIR}/es/ganglia.js DESTINATION componentfiles/files/ganglia/nls/es/ganglia.js COMPONENT Runtime )
-INSTALL( FILES ${CMAKE_CURRENT_SOURCE_DIR}/bs/ganglia.js DESTINATION componentfiles/files/ganglia/nls/bs/ganglia.js COMPONENT Runtime )
-INSTALL( FILES ${CMAKE_CURRENT_SOURCE_DIR}/hr/ganglia.js DESTINATION componentfiles/files/ganglia/nls/bs/ganglia.js COMPONENT Runtime )
-INSTALL( FILES ${CMAKE_CURRENT_SOURCE_DIR}/hu/ganglia.js DESTINATION componentfiles/files/ganglia/nls/bs/ganglia.js COMPONENT Runtime )
-INSTALL( FILES ${CMAKE_CURRENT_SOURCE_DIR}/pt-br/ganglia.js DESTINATION componentfiles/files/ganglia/nls/bs/ganglia.js COMPONENT Runtime )
-INSTALL( FILES ${CMAKE_CURRENT_SOURCE_DIR}/sr/ganglia.js DESTINATION componentfiles/files/ganglia/nls/bs/ganglia.js COMPONENT Runtime )
-INSTALL( FILES ${CMAKE_CURRENT_SOURCE_DIR}/zh/ganglia.js DESTINATION componentfiles/files/ganglia/nls/bs/ganglia.js COMPONENT Runtime )
+INSTALL( FILES ${CMAKE_CURRENT_SOURCE_DIR}/ganglia.js DESTINATION componentfiles/files/ganglia/nls COMPONENT Runtime )
+INSTALL( FILES ${CMAKE_CURRENT_SOURCE_DIR}/es/ganglia.js DESTINATION componentfiles/files/ganglia/nls/es COMPONENT Runtime )
+INSTALL( FILES ${CMAKE_CURRENT_SOURCE_DIR}/bs/ganglia.js DESTINATION componentfiles/files/ganglia/nls/bs COMPONENT Runtime )
+INSTALL( FILES ${CMAKE_CURRENT_SOURCE_DIR}/hr/ganglia.js DESTINATION componentfiles/files/ganglia/nls/hr COMPONENT Runtime )
+INSTALL( FILES ${CMAKE_CURRENT_SOURCE_DIR}/hu/ganglia.js DESTINATION componentfiles/files/ganglia/nls/hu COMPONENT Runtime )
+INSTALL( FILES ${CMAKE_CURRENT_SOURCE_DIR}/pt-br/ganglia.js DESTINATION componentfiles/files/ganglia/nls/pt-br COMPONENT Runtime )
+INSTALL( FILES ${CMAKE_CURRENT_SOURCE_DIR}/sr/ganglia.js DESTINATION componentfiles/files/ganglia/nls/sr COMPONENT Runtime )
+INSTALL( FILES ${CMAKE_CURRENT_SOURCE_DIR}/zh/ganglia.js DESTINATION componentfiles/files/ganglia/nls/zh COMPONENT Runtime )
 
