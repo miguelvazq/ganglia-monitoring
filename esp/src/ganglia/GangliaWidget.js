@@ -244,7 +244,7 @@ define([
         _buildTabs: function () {
             var context = this;
             var tabs = registry.byId(this.id + "TabContainer");
-            xhr("plugins/ganglia/ganglia.json", {
+            xhr("esp/files/ganglia/ganglia.json", {
                 handleAs: "json"
             }).then(function (data){
                 arrayUtil.forEach(data.tabs, function(tabItem, idx) {
@@ -319,7 +319,7 @@ define([
 
         _genGraphRefresh : function (id) {
             var context = this;
-            xhr("plugins/ganglia/ganglia.json", {
+            xhr("esp/files/ganglia/ganglia.json", {
                 handleAs: "json"
             }).then(function (data){
                 arrayUtil.forEach(data.tabs, function(tabItem, idx) {
@@ -377,7 +377,7 @@ define([
                 },
             }).then(function (response) {
                 if (dojo.byId(context.cluster+context.server+context.metrics+context.epochFilter)) {
-                    alert("Graph already exists. Please generate another.")
+                    alert(this.i18n.GraphExists);
                 } else {
                     if (lang.exists ("GraphSVGDataResponse.Graph", response)) {
                         var graph = domConstruct.create("div", {
@@ -410,7 +410,7 @@ define([
         },
 
         _onNewGraphPage: function (cluster, server, metrics, epochFilter, epochNow) {
-            xhr("plugins/ganglia/ganglia.json", {
+            xhr("esp/files/ganglia/ganglia.json", {
                 handleAs: "json"
             }).then(function (data){
                 WsRrd.GangliaRRDGraphList({

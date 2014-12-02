@@ -9,8 +9,9 @@ define({root:
     FromDate: "From Date",
     Ganglia: "Ganglia",
     GenerateGraph: "Generate Graph",
+    GraphExists: "Graph already exists. Please generate another.",
     Metrics: "Metrics",
-    Openinnewpage: "Open in new page",
+    OpenInNewpage: "Open in new page",
     Server: "Server"
 }),
 "bs": true,
