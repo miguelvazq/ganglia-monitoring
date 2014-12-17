@@ -15,13 +15,11 @@
 ############################################################################## */
 define([
     "dojo/_base/declare",
-    "dojo/_base/lang",
     "dojo/i18n",
     "dojo/i18n!./nls/ganglia",
     "dojo/_base/array",
     "dojo/dom",
     "dojo/dom-form",
-    "dojo/on",
 
     "dijit/registry",
     "dijit/form/Select",
@@ -37,7 +35,7 @@ define([
 
     "hpcc/TableContainer"
 
-], function (declare, lang, i18n, nlsHPCC, arrayUtil, dom, domForm, on,
+], function (declare, i18n, nlsHPCC, arrayUtil, dom, domForm,
                 registry, Select,
                 _Widget,
                 template) {

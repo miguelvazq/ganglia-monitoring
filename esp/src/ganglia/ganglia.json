@@ -1,6 +1,8 @@
 {
   "width": "400",
   "height": "150",
+  "largeWidth": "600",
+  "largeHeight": "300",
   "defaultSelectedTab": "Network - Hour",
   "tabs": [
    {

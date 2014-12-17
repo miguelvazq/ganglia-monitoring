@@ -20,9 +20,8 @@ define([
     "dojo/i18n",
     "dojo/i18n!./nls/ganglia",
     "dojo/dom",
-    "dojo/_base/array",
+    "dojo/on",
     "dojo/dom-construct",
-    "dojo/dom-attr",
     "dojo/promise/all",
     "dojo/store/Memory",
     "dojo/request/xhr",
@@ -31,13 +30,6 @@ define([
     "dijit/registry",
     "dijit/Menu",
     "dijit/MenuItem",
-
-    "dgrid/OnDemandGrid",
-    "dgrid/Keyboard",
-    "dgrid/Selection",
-    "dgrid/selector",
-    "dgrid/extensions/ColumnResizer",
-    "dgrid/extensions/DijitRegistry",
 
     "./GangliaFilterDropDownWidget",
     "./WsRrd",
@@ -54,18 +46,17 @@ define([
     "dijit/Dialog",
     "dijit/form/Button",
     "dijit/form/CheckBox",
+    "dijit/form/DropDownButton",
+    "dijit/form/FilteringSelect",
     "dijit/ToolbarSeparator",
     "dijit/TooltipDialog",
     "dijit/TitlePane",
-    "dijit/form/DropDownButton",
-    "dijit/form/FilteringSelect",
     "dijit/CheckedMenuItem",
     "dijit/MenuSeparator",
     "dijit/PopupMenuItem"
 
-], function (declare, arrayUtil, lang, i18n, nlsHPCC, dom, arrayUtil, domConstruct, domAttr, all, Memory, xhr, query,
+], function (declare, arrayUtil, lang, i18n, nlsHPCC, dom, on, domConstruct, all, Memory, xhr, query,
                 registry, Menu, MenuItem,
-                OnDemandGrid, Keyboard, Selection, selector, ColumnResizer, DijitRegistry,
                 GangliaFilterDropDownWidget, WsRrd, _TabContainerWidget,
                 template,
                 BorderContainer, TabContainer, ContentPane, Toolbar, Button) {
@@ -121,15 +112,11 @@ define([
                 context.metrics = newValue;
             });
 
-            this.filter.on("clear", function (evt) {
-                context._onFilterType();
-                context.refreshGrid();
-            });
             this.filter.on("apply", function (evt) {
                 context._onFilterApply();
             });
 
-            this.fromGanliaDateRange.set(name, value);
+            this._calculateEpoch(this.fromGanliaDateRange.value);
 
             this.fromGanliaDateRange.on('change', function (newValue) {
                 context._calculateEpoch(newValue);
@@ -140,31 +127,28 @@ define([
             var currSel = this.getSelectedChild();
         },
 
-        stringTrim: function () {
-
-        },
 
         _calculateEpoch: function(newValue){
             var context = this;
             this.epochNow = Math.round(new Date().getTime()/1000.0);
-                switch(newValue) {
-                    case "Year":
-                        context.epochFilter = context.epochNow - 31556926
-                    break;
-                    case "Month":
-                        context.epochFilter = context.epochNow - 2629743
-                    break;
-                    case "Week":
-                        context.epochFilter = context.epochNow - 604800
-                    break;
-                    case "Day":
-                        context.epochFilter = context.epochNow - 86400
-                    break;
-                    case "Hour":
-                        context.epochFilter = context.epochNow - 3600
-                    break;
-                    default:
-                        context.epocFilter = context.epochNow - 31556926;
+            switch(newValue) {
+                case "Year":
+                    context.epochFilter = context.epochNow - 31556926;
+                break;
+                case "Month":
+                    context.epochFilter = context.epochNow - 2629743;
+                break;
+                case "Week":
+                    context.epochFilter = context.epochNow - 604800;
+                break;
+                case "Day":
+                    context.epochFilter = context.epochNow - 86400;
+                break;
+                case "Hour":
+                    context.epochFilter = context.epochNow - 3600;
+                break;
+                default:
+                    context.epocFilter = context.epochNow - 31556926;
             }
         },
 
@@ -182,7 +166,7 @@ define([
                         return {
                             name: item,
                             id: item
-                        };
+                        }
                     });
                     var myStore = new Memory({
                         data: output
@@ -194,7 +178,6 @@ define([
 
         _buildServers: function (newValue) {
             var context = this;
-            console.log(this.serverTargetSelect);
             this.serverTargetSelect.required = false;
             WsRrd.GangliaServerList({
                 request:{
@@ -206,7 +189,7 @@ define([
                         return {
                             name: item,
                             id: item
-                        };
+                        }
                     });
                     var myStore = new Memory({
                         data: output
@@ -363,6 +346,10 @@ define([
             var metrics = context.metrics;
             var epochFilter = context.epochFilter;
             var epochNow = context.epochNow;
+            var stringClean = context.cluster + ":" + context.server + ":" + context.metrics;
+            if(stringClean.length > 30){
+                stringClean = context.cluster + "\n" + context.server;
+            }
 
             WsRrd.GangliaRRDGraphList({
                 request:{
@@ -373,11 +360,11 @@ define([
                     EndTime: epochNow,
                     Width: 300,
                     Height: 120,
-                    Title: context.cluster + ":" + context.server + ":" + context.metrics
+                    Title: stringClean
                 },
             }).then(function (response) {
                 if (dojo.byId(context.cluster+context.server+context.metrics+context.epochFilter)) {
-                    alert(this.i18n.GraphExists);
+                    alert(context.i18n.GraphExists);
                 } else {
                     if (lang.exists ("GraphSVGDataResponse.Graph", response)) {
                         var graph = domConstruct.create("div", {
@@ -425,7 +412,7 @@ define([
                 },
             }).then(function (response) {
                     if (lang.exists ("GraphSVGDataResponse.Graph", response)) {
-                        var newWindow = window.open('','_blank', 'width=200,height=100');
+                        var newWindow = window.open('','_blank', 'width=' + data.largeWidth + ',height=' + data.largeHeight + '');
                         var newContent = "<HTML><HEAD><TITLE>Graph</TITLE></HEAD>";
                         newContent += "<BODY><div>"+response.GraphSVGDataResponse.Graph+"</div>";
                         newContent += "</BODY></HTML>";
