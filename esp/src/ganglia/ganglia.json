@@ -7,7 +7,7 @@
 	"name": "Network Hour",
 	"metrics":[
 		["bytes_in", "bytes_out"],
-		["packetsSent", "packetsSent_s", "packetsReceived", "packetsReceived_s", "packetsAbandonded", "packetsAbandoned_s", "packetsRetried", "packetsRetried_s"],
+		["packetsSent", "packetsSent_s", "packetsReceived", "packetsReceived_s", "packetsAbandoned", "packetsAbandoned_s", "packetsRetried", "packetsRetried_s"],
 	       	["ibytiPacketsReceived", "ibytiPacketsSent", "ibytiPacketsReceived_s", "ibytiPacketsSent_s"],
 		["ibytiNoDelaysPrm", "ibytiPacketsFromSelf", "ibytiPacketsTooLate", "ibytiPacketsWorked", "ibytiNoDelaysSec", "ibytiPacketsHalfWorked"],
 		["ibytiPacketsHalfWorked_s", "ibytiNoDelaysSec_s",  "ibytiPacketsReceived_s", "ibytiPacketsSent_s", "ibytiPacketsWorked_s", "ibytiNoDelaysPrm_s", "ibytiPacketsTooLate_s"]
@@ -18,7 +18,7 @@
 	"name": "Network Day",
 	"metrics":[
         	["bytes_in", "bytes_out"],
-	        ["packetsSent", "packetsSent_s", "packetsReceived", "packetsReceived_s", "packetsAbandonded", "packetsAbandoned_s", "packetsRetried", "packetsRetried_s"],
+	        ["packetsSent", "packetsSent_s", "packetsReceived", "packetsReceived_s", "packetsAbandoned", "packetsAbandoned_s", "packetsRetried", "packetsRetried_s"],
 	        ["ibytiPacketsReceived", "ibytiPacketsSent", "ibytiPacketsReceived_s", "ibytiPacketsSent_s"],
 		["ibytiNoDelaysPrm", "ibytiPacketsFromSelf", "ibytiPacketsTooLate", "ibytiPacketsWorked", "ibytiNoDelaysSec", "ibytiPacketsHalfWorked"],
 		["ibytiPacketsHalfWorked_s", "ibytiNoDelaysSec_s",  "ibytiPacketsReceived_s", "ibytiPacketsSent_s", "ibytiPacketsWorked_s", "ibytiNoDelaysPrm_s", "ibytiPacketsTooLate_s"]
@@ -39,7 +39,7 @@
 	"metrics" :[
 		["disk_free", "disk_total"],
 		["load_one", "load_five", "load_fifteen"],
-		["cpu_aidle", "cpu_idle", "cpu_nice", "cpu_num", "cpu_report", "cpu_system", "cpu_user", "cpu_wio"]
+		["cpu_aidle", "cpu_idle", "cpu_nice", "cpu_num", "cpu_system", "cpu_user", "cpu_wio"]
 	],
 	"time":["Hour", "Day","Week"]
    },

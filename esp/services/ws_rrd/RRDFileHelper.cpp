@@ -32,7 +32,7 @@ bool CRRDFileHelper::getRRDServerDirectoryNames(const char *pCluster, StringArra
 
     if (pCluster != NULL && *pCluster != 0 && strcmp(pCluster, pSummaryInfo) != 0)
     {
-        strPath.appendf("/%s/", pCluster);
+        strPath.appendf("%c%s%c", PATHSEPCHAR, pCluster, PATHSEPCHAR);
     }
 
     Owned<IFile> summaryInfoDir = createIFile(strPath.str());

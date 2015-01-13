@@ -23,11 +23,7 @@
 #  LIBXML2_LIBRARIES - The libraries needed to use libxml2
 
 if (NOT LIBXML2_FOUND)
-  IF (WIN32)
     SET (libxml2_libs "xml2 libxml2")
-  ELSE()
-    SET (libxml2_libs "xml2 libxml2")
-  ENDIF()
 
   IF (NOT "${EXTERNALS_DIRECTORY}" STREQUAL "")
     IF (UNIX)

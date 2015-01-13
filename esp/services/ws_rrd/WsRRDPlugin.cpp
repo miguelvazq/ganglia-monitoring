@@ -1,7 +1,7 @@
 
 /*##############################################################################
 
-    HPCC SYSTEMS software Copyright (C) 2014 HPCC Systems.
+    HPCC SYSTEMS software Copyright (C) 2015 HPCC Systems.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ ESP_FACTORY IEspService * esp_service_factory(const char *name, const char* type
    if (strcmp(type, "ws_rrd")==0)
    {
       Cws_rrdEx* service = new Cws_rrdEx;
-        service->init(cfg, process, name);
+      service->init(cfg, process, name);
       return service;
    }
    return NULL;

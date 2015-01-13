@@ -42,23 +42,11 @@ MemoryBuffer* CRRDGraphWrapper::getGraph(MemoryBuffer *pBuffer, const StringArra
     StringBuffer strRRDFilePath;
     StringBuffer strRRDGraphCmd(pRRDGraphPath == NULL ? pDefaultRRDGraphPath : pRRDGraphPath);
 
-    static unsigned long long graphCount = 0;
-
     char pPath[DEFAULT_ARR_SIZE];
     StringBuffer strDestinationPath(UniquePath.getTempPath(pPath));
 
-    graphCount++;
-
     strRRDGraphCmd.appendf(" %s", strDestinationPath.str());
-
-    if (bGenPNG == false)
-    {
-        strRRDGraphCmd.appendf(" %s", pFileTypeSVG);
-    }
-    else
-    {
-        strRRDGraphCmd.appendf(" %s", pFileTypeJPEG);
-    }
+    strRRDGraphCmd.appendf(" %s", bGenPNG == false ? pFileTypeSVG : pFileTypePNG);
     strRRDGraphCmd.appendf(" %s %ld", pStartTime, nStartTime);
     strRRDGraphCmd.appendf(" %s %ld", pEndTime, nEndTime);
 
@@ -81,8 +69,7 @@ MemoryBuffer* CRRDGraphWrapper::getGraph(MemoryBuffer *pBuffer, const StringArra
     if (bServerSpecified == true && bClusterSpecified == false) // invalid
     {
         PROGLOG("ganglia-monitoring: Cannot specifiy server with no cluster");
-        MakeStringException(0, "ganglia-monitoring: Cannot specifiy server with no cluster");
-        return pBuffer;
+        throw MakeStringException(0, "ganglia-monitoring: Cannot specifiy server with no cluster");
     }
 
     for (int idxMetric = 0; idxMetric < nRRDFileCount; idxMetric++)
@@ -117,7 +104,7 @@ MemoryBuffer* CRRDGraphWrapper::getGraph(MemoryBuffer *pBuffer, const StringArra
             if (checkFileExists(strRRDFilePath.str()) == false)
             {
                 PROGLOG("Can not find rrd file for '%s'", strRRDFilePath.str());
-                MakeStringException(0, "Can not find rrd file for '%s'", strRRDFilePath.str());
+                throw MakeStringException(0, "Can not find rrd file for '%s'", strRRDFilePath.str());
             }
 
             strRRDGraphCmd.appendf(" %s%d%d=%s", pDataDefinitionPrefix1, idxMetric+1, idx+1, strRRDFilePath.str());
@@ -139,8 +126,8 @@ MemoryBuffer* CRRDGraphWrapper::getGraph(MemoryBuffer *pBuffer, const StringArra
         strRRDGraphCmd.appendf(" -t '%s'", pTitle);
     }
 
-    FILE *fp = popen(strRRDGraphCmd.str(), "r");
     PROGLOG("RRDTOOL GRAPH CMD --> %s <--", strRRDGraphCmd.str());
+    FILE *fp = popen(strRRDGraphCmd.str(), "r");
 
     if (fp == NULL)
     {
@@ -164,8 +151,7 @@ MemoryBuffer* CRRDGraphWrapper::getGraph(MemoryBuffer *pBuffer, const StringArra
 
     StringBuffer strBufferIn;
 
-    char removedChars[64];
-    memset(removedChars, 0, sizeof(removedChars));
+    char removedChars[64] = {0};
 
     int nCount = 0;
     do
@@ -183,6 +169,11 @@ MemoryBuffer* CRRDGraphWrapper::getGraph(MemoryBuffer *pBuffer, const StringArra
         nCount++;
     }
     while(nCharacter != -1);
+
+    if (*removedChars != 0)
+    {
+        DBGLOG("Removing XML tag:%s", removedChars);
+    }
 
     StringBuffer strBufferIn2(strBufferIn.str());
     strBufferIn.clear().set(strBufferIn2.str());
@@ -257,7 +248,6 @@ MemoryBuffer* CRRDGraphWrapper::getGraph(MemoryBuffer *pBuffer, const StringArra
     pBuffer->resetBuffer();
     pBuffer->append(strBufferIn.str());
     delete[] pBufferIn;
-    pBufferIn = 0;
 
     DeleteFile(strDestinationPath.str());
 
@@ -267,6 +257,8 @@ MemoryBuffer* CRRDGraphWrapper::getGraph(MemoryBuffer *pBuffer, const StringArra
 CRRDGraphWrapper::CUniquePath::CUniquePath() : m_strTempDirectory(mkdtemp(pDestinationPath))
 {
     int nRetVal =_mkdir(m_strTempDirectory.str());
+
+    PROGLOG("creating temp dir: %s", m_strTempDirectory.str());
 
     if (nRetVal != 0)
     {
