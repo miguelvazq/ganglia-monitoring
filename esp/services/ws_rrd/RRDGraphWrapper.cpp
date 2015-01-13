@@ -275,7 +275,7 @@ char* CRRDGraphWrapper::CUniquePath::getTempPath(char *pUniqueName)
 {
     char pTempFile[DEFAULT_ARR_SIZE] = "";
 
-    strncpy(pTempFile, pTempFileTemplate,  DEFAULT_ARR_SIZE);
+    strcpy(pTempFile, pTempFileTemplate);
 
     int tempFile = mkstemp(pTempFile);
 

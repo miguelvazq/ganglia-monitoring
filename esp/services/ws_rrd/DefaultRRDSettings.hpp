@@ -10,7 +10,7 @@ static const char *pSummaryInfo("__SummaryInfo__");
 static const char *pDefaultPathSummaryInfo("/var/lib/ganglia/rrds/__SummaryInfo__/");
 static const char *pRootFileName("tmpgraph");
 static char pDestinationPath[DEFAULT_ARR_SIZE] = "/tmp/hpcc_ws_rrd_graphsXXXXXX";
-static const char pTempFileTemplate[DEFAULT_ARR_SIZE] = "graphXXXXXX";
+static const char *pTempFileTemplate = "graphXXXXXX";
 static const char *pFileTypeSVG("-a SVG");
 static const char *pFileTypePNG("-a PNG");
 static const char *pStartTime("--start");
