@@ -41,7 +41,6 @@ INSTALL ( PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/getMetrics.sh DESTINATION sbin CO
 
 HPCC_ADD_SUBDIRECTORY (esp)
 HPCC_ADD_SUBDIRECTORY (initfiles)
-#HPCC_ADD_SUBDIRECTORY (scripts)
 
 CONFIGURE_FILE( "postinst.in" "postinst" )
 CONFIGURE_FILE( "postrm.in" "postrm" )

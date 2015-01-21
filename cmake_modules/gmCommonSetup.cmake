@@ -40,8 +40,8 @@ IF ("${COMMONSETUP_DONE}" STREQUAL "")
 
   cmake_policy ( SET CMP0011 NEW )
 
-  option(CLIENTTOOLS "Enable the building/inclusion of a Client Tools component." OFF)
-  option(PLATFORM "Enable the building/inclusion of a Platform component." ON)
+#  option(CLIENTTOOLS "Enable the building/inclusion of a Client Tools component." OFF)
+#  option(PLATFORM "Enable the building/inclusion of a Platform component." ON)
   option(DEVEL "Enable the building/inclusion of a Development component." OFF)
   option(CLIENTTOOLS_ONLY "Enable the building of Client Tools only." OFF)
 

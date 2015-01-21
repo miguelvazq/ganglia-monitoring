@@ -197,6 +197,7 @@ MemoryBuffer* CRRDGraphWrapper::getGraph(MemoryBuffer *pBuffer, const StringArra
 
         if (len > 1024)
         {
+	    delete[] pBufferIn;
             PROGLOG("SVG id too long");
             return NULL;
         }
