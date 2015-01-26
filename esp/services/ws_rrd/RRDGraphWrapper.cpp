@@ -42,8 +42,8 @@ MemoryBuffer* CRRDGraphWrapper::getGraph(MemoryBuffer *pBuffer, const StringArra
     StringBuffer strRRDFilePath;
     StringBuffer strRRDGraphCmd(pRRDGraphPath == NULL ? pDefaultRRDGraphPath : pRRDGraphPath);
 
-    char pPath[DEFAULT_ARR_SIZE];
-    StringBuffer strDestinationPath(UniquePath.getTempPath(pPath));
+    StringBuffer strDestinationPath;
+    UniquePath.getTempPath(strDestinationPath);
 
     strRRDGraphCmd.appendf(" %s", strDestinationPath.str());
     strRRDGraphCmd.appendf(" %s", bGenPNG == false ? pFileTypeSVG : pFileTypePNG);
@@ -272,17 +272,14 @@ CRRDGraphWrapper::CUniquePath::~CUniquePath()
     rmdir(m_strTempDirectory.str());
 }
 
-char* CRRDGraphWrapper::CUniquePath::getTempPath(char *pUniqueName)
+void CRRDGraphWrapper::CUniquePath::getTempPath(StringBuffer &strUniqueName)
 {
-    char pTempFile[DEFAULT_ARR_SIZE] = "";
+    strUniqueName.setf("%s%c%s", m_strTempDirectory.str(), PATHSEPCHAR, pTempFileTemplate);
 
-    strcpy(pTempFile, pTempFileTemplate);
+    char *pTempFilePath = new char[strUniqueName.length()+1];
+    strcpy(pTempFilePath, strUniqueName.str());
 
-    int tempFile = mkstemp(pTempFile);
+    close(mkstemp(pTempFilePath));
 
-    close(tempFile);
-
-    sprintf(pUniqueName, "%s%c%s", m_strTempDirectory.str(), PATHSEPCHAR, pTempFile);
-
-    return pUniqueName;
+    strUniqueName.set(pTempFilePath);
 }
