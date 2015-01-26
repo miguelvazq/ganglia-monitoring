@@ -5,6 +5,7 @@
 
 class MemoryBuffer;
 class StringArray;
+class StringBuffer;
 
 class CRRDGraphWrapper
 {
@@ -22,7 +23,7 @@ private:
 
         virtual ~CUniquePath();
 
-        char* getTempPath(char *pUniqueName);
+        void getTempPath(StringBuffer& strUniqueName);
 
     private:
 
